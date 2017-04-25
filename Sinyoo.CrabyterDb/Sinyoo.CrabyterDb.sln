@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sinyoo.CrabyterDb", "Sinyoo.CrabyterDb\Sinyoo.CrabyterDb.csproj", "{5BA74529-E135-409D-A3E8-63F33F3218CA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sinyoo.CrabyterDb.ASPNetCoreSample", "Sinyoo.CrabyterDb.ASPNetCoreSample\Sinyoo.CrabyterDb.ASPNetCoreSample.csproj", "{328D276C-586E-4063-8186-384BCD0F0813}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{5BA74529-E135-409D-A3E8-63F33F3218CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5BA74529-E135-409D-A3E8-63F33F3218CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5BA74529-E135-409D-A3E8-63F33F3218CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{328D276C-586E-4063-8186-384BCD0F0813}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{328D276C-586E-4063-8186-384BCD0F0813}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{328D276C-586E-4063-8186-384BCD0F0813}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{328D276C-586E-4063-8186-384BCD0F0813}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
