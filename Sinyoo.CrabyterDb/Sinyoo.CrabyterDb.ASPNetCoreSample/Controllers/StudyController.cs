@@ -20,7 +20,8 @@ namespace Sinyoo.CrabyterDb.ASPNetCoreSample.Controllers
         [Authorize]
         public IActionResult List()
         {
-            return View();
+            var studyList = crabyterDbService.GetStudyList();
+            return View(studyList);
         }
     }
 }

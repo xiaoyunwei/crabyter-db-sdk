@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Sinyoo.CrabyterDb.Models;
+using Sinyoo.CrabyterDb.Study;
 
 namespace Sinyoo.CrabyterDb.ASPNetCoreSample.Services
 {
@@ -71,6 +73,13 @@ namespace Sinyoo.CrabyterDb.ASPNetCoreSample.Services
         public async Task<bool> LoginAsync(string userName, string password)
         {
             bool result = await account.LoginAsync(userName, password);
+            return result;
+        }
+
+        public async Task<IEnumerable<CrabyterDb.Models.Study>> GetStudyList()
+        {            
+            StudyClient client = account.CreateStudyClient();
+            var result = await client.GetStudies();
             return result;
         }
     }
