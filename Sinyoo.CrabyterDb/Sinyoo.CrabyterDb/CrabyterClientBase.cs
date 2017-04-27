@@ -13,7 +13,7 @@ using System.Net;
 
 namespace Sinyoo.CrabyterDb
 {
-    public abstract class CrabyterClientBase : ICrabyterServiceProvider
+    public abstract class CrabyterClientBase : IRestService
     {
         protected RestHelper restHelper;
 

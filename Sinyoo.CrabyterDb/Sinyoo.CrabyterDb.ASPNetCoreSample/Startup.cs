@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Http;
+using Sinyoo.CrabyterDb.ASPNetCoreSample.Services;
 
 namespace Sinyoo.CrabyterDb.ASPNetCoreSample
 {
@@ -29,6 +27,13 @@ namespace Sinyoo.CrabyterDb.ASPNetCoreSample
         {
             // Add framework services.
             services.AddMvc();
+            services.AddAuthorization();
+
+            services.AddOptions();
+            services.Configure<CrabyterApiOptions>(this.Configuration.GetSection("CrabyterDbApi"));
+
+            services.AddSingleton<ICrabyterDbServiceProvider, CrabyterDbClient>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,6 +53,15 @@ namespace Sinyoo.CrabyterDb.ASPNetCoreSample
             }
 
             app.UseStaticFiles();
+
+            app.UseCookieAuthentication(new CookieAuthenticationOptions()
+            {
+                AuthenticationScheme = ConstantDefinitions.AUTH_SCHEME_NAME,
+                LoginPath = new PathString("/Account/Login/"),
+                AccessDeniedPath = new PathString("/Account/Forbidden/"),
+                AutomaticAuthenticate = true,
+                AutomaticChallenge = true
+            });
 
             app.UseMvc(routes =>
             {

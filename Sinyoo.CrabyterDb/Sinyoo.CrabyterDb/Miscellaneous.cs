@@ -27,7 +27,7 @@ namespace Sinyoo.CrabyterDb
         public Exception ResponseException { get; set; }
     }
 
-    public interface ICrabyterServiceProvider
+    public interface IRestService
     {
         string ServiceEndpoint { get; }
 

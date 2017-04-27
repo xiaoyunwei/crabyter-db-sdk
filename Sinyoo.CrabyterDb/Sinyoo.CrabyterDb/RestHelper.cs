@@ -12,14 +12,14 @@ namespace Sinyoo.CrabyterDb
     {
         IRestClient restClient;
 
-        public RestHelper(ICrabyterServiceProvider serviceProvider)
+        public RestHelper(IRestService serviceProvider)
         {
             this.ServiceProvider = serviceProvider;
 
             restClient = new RestClient(serviceProvider.ServiceEndpoint);
         }
 
-        public ICrabyterServiceProvider ServiceProvider { get; private set; }
+        public IRestService ServiceProvider { get; private set; }
 
         public async Task<T> ExecuteRequestAsync<T>(string url, Dictionary<string, object> parameters = null, Method method = Method.GET, bool guest = false)
         {

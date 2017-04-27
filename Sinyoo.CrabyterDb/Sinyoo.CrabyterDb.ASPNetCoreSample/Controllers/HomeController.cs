@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Sinyoo.CrabyterDb.ASPNetCoreSample.Services;
 
 namespace Sinyoo.CrabyterDb.ASPNetCoreSample.Controllers
 {
-    
+
     public class HomeController : Controller
     {
         public IActionResult Index()
         {
             return View();
         }
+
 
         public IActionResult About()
         {
@@ -26,9 +25,5 @@ namespace Sinyoo.CrabyterDb.ASPNetCoreSample.Controllers
             return View();
         }
 
-        public IActionResult Login()
-        {
-            return View();
-        }
     }
 }

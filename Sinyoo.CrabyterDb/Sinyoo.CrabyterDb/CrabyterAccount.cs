@@ -8,7 +8,7 @@ using RestSharp.Portable.Authenticators;
 
 namespace Sinyoo.CrabyterDb
 {
-    public class CrabyterAccount: ICrabyterServiceProvider
+    public class CrabyterAccount: IRestService
     {
         private RestHelper restHelper;
 
