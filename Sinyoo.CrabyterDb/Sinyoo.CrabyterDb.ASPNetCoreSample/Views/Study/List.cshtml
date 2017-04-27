@@ -1,8 +1,33 @@
+@using Sinyoo.CrabyterDb.Models
+@model IEnumerable<Study>
 
 @{
     ViewData["Title"] = "List";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>øŒÃ‚¡–±Ì</h2>
-
+<h2>Study List</h2>
+<div class="row">
+    @{
+        if (Model != null)
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td>Study Name</td>
+                        <td>Start Date</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var study in Model)
+                    {
+                        <tr>
+                            <td>@study.StudyName</td>
+                            <td>@study.StartDate</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    }
+</div>
