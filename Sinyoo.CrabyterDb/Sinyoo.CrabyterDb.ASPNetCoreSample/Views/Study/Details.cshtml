@@ -1,0 +1,176 @@
+@using Sinyoo.CrabyterDb.Models
+@model Study
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Study Details</h2>
+
+<div>
+    @if (Model.Id > 0)
+    {
+    <h4>Study @Model.Id</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.StudyType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StudyType)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.StudyTypeDescription)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StudyTypeDescription)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.StudyCode)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StudyCode)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.StudyName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StudyName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EndDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EndDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsMuiltiCenter)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsMuiltiCenter)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsGroupExperiment)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsGroupExperiment)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsSystemRandom)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsSystemRandom)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsLocked)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsLocked)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.StatusDescription)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StatusDescription)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsCrfPublished)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsCrfPublished)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IconUrl)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IconUrl)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RequiredPatientCount)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RequiredPatientCount)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UserRole)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UserRole)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsPI)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsPI)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsSI)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsSI)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.InGroupPatientCount)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.InGroupPatientCount)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.InQueuePatientCount)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.InQueuePatientCount)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LockedPatientCount)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LockedPatientCount)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsForDemo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsForDemo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IntroductionUrl)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IntroductionUrl)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LastPatientUpdateTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LastPatientUpdateTime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CompletionPercentage)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CompletionPercentage)
+        </dd>
+    </dl>
+    }
+    else
+    {
+        <h4>Invalid Study Id or Access Denied</h4>
+    }
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

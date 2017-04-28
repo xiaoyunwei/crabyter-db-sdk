@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using System.Collections.Generic;
+using Sinyoo.CrabyterDb.Models;
 
 namespace Sinyoo.CrabyterDb.ASPNetCoreSample.Services
 {
@@ -9,8 +10,14 @@ namespace Sinyoo.CrabyterDb.ASPNetCoreSample.Services
 
         string Token { get; set; }
 
+        User User { get; }
+
         Task<bool> LoginAsync(string userName, string password);
 
+        Task<bool> LogoutAsync();
+
         Task<IEnumerable<CrabyterDb.Models.Study>> GetStudyList();
+
+        Task<CrabyterDb.Models.Study> GetStudyById(int studyId);
     }
 }

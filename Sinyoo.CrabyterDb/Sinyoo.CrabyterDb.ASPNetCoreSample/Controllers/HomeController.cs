@@ -7,6 +7,13 @@ namespace Sinyoo.CrabyterDb.ASPNetCoreSample.Controllers
 
     public class HomeController : Controller
     {
+        private readonly ICrabyterDbServiceProvider crabyterDbService;
+
+        public HomeController(ICrabyterDbServiceProvider crabyterDbServiceProvider)
+        {
+            crabyterDbService = crabyterDbServiceProvider;
+        }
+
         public IActionResult Index()
         {
             return View();

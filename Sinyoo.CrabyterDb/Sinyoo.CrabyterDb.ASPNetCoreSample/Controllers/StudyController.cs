@@ -18,10 +18,17 @@ namespace Sinyoo.CrabyterDb.ASPNetCoreSample.Controllers
         }
 
         [Authorize]
-        public IActionResult List()
+        public async Task<IActionResult> Index()
         {
-            var studyList = crabyterDbService.GetStudyList();
+            var studyList = await crabyterDbService.GetStudyList();
             return View(studyList);
+        }
+
+        [Authorize]
+        public async Task<ActionResult> Details(int id)
+        {
+            var study = await crabyterDbService.GetStudyById(id);
+            return View(study);
         }
     }
 }

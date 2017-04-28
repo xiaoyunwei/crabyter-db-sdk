@@ -74,8 +74,41 @@ namespace Sinyoo.CrabyterDb
                 //用户名不存在或用户名密码不匹配，通过异常信息返回错误原因
                 //如果只返回False，则无法告知登陆失败原因
                 Exception ex= new Exception(result.ErrorMessage);
-                throw ex;
+                this.OnErrorOccured(ex);
+
+                return false;
             }
+        }
+
+        /// <summary>
+        /// 注销
+        /// </summary>
+        /// <returns></returns>
+        public async Task<bool> LogoutAsync()
+        {
+            if(!string.IsNullOrEmpty(UserName) && !string.IsNullOrEmpty(Token))
+            {
+                var result = await restHelper.ExecuteRequestAsync<CallResultInfo>("account/logout", null, Method.POST);
+
+                if (result.CallResult == CallResultType.Success)
+                {
+                    //注销成功，设置 UserName 和 Token
+                    this.UserName = "";
+                    this.Token = "";
+
+                    return true;
+                }
+                else
+                {
+                    //注销失败，抛出异常
+                    Exception ex = new Exception(result.ErrorMessage);
+                    this.OnErrorOccured(ex);
+
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         /// <summary>

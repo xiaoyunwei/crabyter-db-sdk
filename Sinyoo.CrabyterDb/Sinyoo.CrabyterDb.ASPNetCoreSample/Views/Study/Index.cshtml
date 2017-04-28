@@ -14,16 +14,20 @@
             <table class="table">
                 <thead>
                     <tr>
+                        <td>Id</td>
                         <td>Study Name</td>
                         <td>Start Date</td>
+                        <td>Patients</td>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var study in Model)
+                    @foreach (var study in Model.OrderBy(p=>p.Id))
                     {
                         <tr>
+                            <td><a asp-action="Details" asp-route-id="@study.Id">@study.Id</a></td>
                             <td>@study.StudyName</td>
                             <td>@study.StartDate</td>
+                            <td>@study.InGroupPatientCount</td>
                         </tr>
                     }
                 </tbody>

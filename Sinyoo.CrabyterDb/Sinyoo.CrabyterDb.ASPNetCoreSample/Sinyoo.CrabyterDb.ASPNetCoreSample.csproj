@@ -26,8 +26,5 @@
   <ItemGroup>
     <ProjectReference Include="..\Sinyoo.CrabyterDb\Sinyoo.CrabyterDb.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\Study\" />
-  </ItemGroup>
 
 </Project>

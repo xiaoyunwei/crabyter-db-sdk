@@ -4,6 +4,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Sinyoo.CrabyterDb;
 using Sinyoo.CrabyterDb.ASPNetCoreSample.Services;
+using Sinyoo.CrabyterDb.ASPNetCoreSample.Models;
 
 namespace Sinyoo.CrabyterDb.ASPNetCoreSample.Controllers
 {
@@ -24,11 +25,11 @@ namespace Sinyoo.CrabyterDb.ASPNetCoreSample.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(string userName, string password, string returnUrl = null)
+        public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
 
-            bool loginSuccess = await crabyterDbService.LoginAsync(userName, password);
+            bool loginSuccess = await crabyterDbService.LoginAsync(model.UserName, model.Password);
 
             if (loginSuccess)
             {
@@ -43,15 +44,20 @@ namespace Sinyoo.CrabyterDb.ASPNetCoreSample.Controllers
 
                 await HttpContext.Authentication.SignInAsync(ConstantDefinitions.AUTH_SCHEME_NAME, principal);
 
-                return LocalRedirect(returnUrl);
+                if (returnUrl != null)
+                    return LocalRedirect(returnUrl);
+                else
+                    return Redirect("/");
             }
 
-            return View();
+            ModelState.AddModelError(string.Empty, "用户名或密码无效");
+            return View(model);
         }
 
         public async Task<IActionResult> Logout()
         {
             await HttpContext.Authentication.SignOutAsync(ConstantDefinitions.AUTH_SCHEME_NAME);
+            await crabyterDbService.LogoutAsync();
             return Redirect("/");
         }
     }
