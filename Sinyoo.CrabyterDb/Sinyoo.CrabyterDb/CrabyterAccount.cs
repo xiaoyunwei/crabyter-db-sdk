@@ -88,14 +88,14 @@ namespace Sinyoo.CrabyterDb
         {
             if(!string.IsNullOrEmpty(UserName) && !string.IsNullOrEmpty(Token))
             {
+                // 先清除 UserName 和 Token
+                this.UserName = "";
+                this.Token = "";
+
                 var result = await restHelper.ExecuteRequestAsync<CallResultInfo>("account/logout", null, Method.POST);
 
                 if (result.CallResult == CallResultType.Success)
-                {
-                    //注销成功，设置 UserName 和 Token
-                    this.UserName = "";
-                    this.Token = "";
-
+                {                   
                     return true;
                 }
                 else
