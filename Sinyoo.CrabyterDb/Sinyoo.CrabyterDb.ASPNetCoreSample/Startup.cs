@@ -32,8 +32,7 @@ namespace Sinyoo.CrabyterDb.ASPNetCoreSample
             services.AddOptions();
             services.Configure<CrabyterApiOptions>(this.Configuration.GetSection("CrabyterDbApi"));
 
-            services.AddSingleton<ICrabyterDbServiceProvider, CrabyterDbClient>();
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<ICrabyterDbServiceProvider, CrabyterDbClient>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

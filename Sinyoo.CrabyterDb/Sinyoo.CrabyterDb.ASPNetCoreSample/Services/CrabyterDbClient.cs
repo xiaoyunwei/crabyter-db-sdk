@@ -15,17 +15,15 @@ namespace Sinyoo.CrabyterDb.ASPNetCoreSample.Services
     {
         private readonly CrabyterApiOptions apiOptions;
         private readonly ILogger clientLogger;
-        private CrabyterAccount account;
+        private CrabyterAccount account;        
 
-        public CrabyterDbClient(IOptions<CrabyterApiOptions> optionsAccessor, ILogger<CrabyterDbClient> logger, IHttpContextAccessor httpContextAccessor)
+        public CrabyterDbClient(IOptions<CrabyterApiOptions> optionsAccessor, ILogger<CrabyterDbClient> logger)
         {
             apiOptions = optionsAccessor.Value;
             clientLogger = logger;
 
             account = new CrabyterAccount(apiOptions.Endpoint, apiOptions.AccountName, apiOptions.Key);
-            account.ErrorOccured += OnErrorOccured;
-
-            this.GetAuthenticationInfo(httpContextAccessor.HttpContext);
+            account.ErrorOccured += OnErrorOccured;           
         }
 
         private async void GetAuthenticationInfo(HttpContext httpContext)
@@ -49,6 +47,20 @@ namespace Sinyoo.CrabyterDb.ASPNetCoreSample.Services
                     this.UserName = "";
                     this.Token = "";
                     await httpContext.Authentication.SignOutAsync(ConstantDefinitions.AUTH_SCHEME_NAME);
+                }
+            }
+        }
+
+        private HttpContext httpContext;
+        public HttpContext HttpContext
+        {
+            get { return httpContext; }
+            set
+            {
+                httpContext = value;
+                if(httpContext != null)
+                {
+                    this.GetAuthenticationInfo(httpContext);
                 }
             }
         }

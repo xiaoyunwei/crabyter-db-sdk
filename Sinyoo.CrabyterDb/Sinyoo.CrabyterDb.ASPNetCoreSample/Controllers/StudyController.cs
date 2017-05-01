@@ -14,6 +14,7 @@ namespace Sinyoo.CrabyterDb.ASPNetCoreSample.Controllers
 
         public StudyController(ICrabyterDbServiceProvider crabyterDbServiceProvider)
         {
+            crabyterDbServiceProvider.HttpContext = this.HttpContext;
             crabyterDbService = crabyterDbServiceProvider;
         }
 

@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using System.Collections.Generic;
 using Sinyoo.CrabyterDb.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace Sinyoo.CrabyterDb.ASPNetCoreSample.Services
 {
@@ -19,5 +20,7 @@ namespace Sinyoo.CrabyterDb.ASPNetCoreSample.Services
         Task<IEnumerable<CrabyterDb.Models.Study>> GetStudyList();
 
         Task<CrabyterDb.Models.Study> GetStudyById(int studyId);
+
+        HttpContext HttpContext { get; set; }
     }
 }
