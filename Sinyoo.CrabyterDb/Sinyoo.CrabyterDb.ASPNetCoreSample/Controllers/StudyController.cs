@@ -28,6 +28,7 @@ namespace Sinyoo.CrabyterDb.ASPNetCoreSample.Controllers
         [Authorize]
         public async Task<ActionResult> Details(int id)
         {
+            crabyterDbService.HttpContext = this.HttpContext;
             var study = await crabyterDbService.GetStudyById(id);
             return View(study);
         }
