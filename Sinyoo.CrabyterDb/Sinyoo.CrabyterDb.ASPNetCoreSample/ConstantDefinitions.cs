@@ -14,5 +14,7 @@ namespace Sinyoo.CrabyterDb.ASPNetCoreSample
         public const string AUTH_USER_TOKEN = "Token";
 
         public const string AUTH_TYPE = "UserNameToken";
+
+        public const string COOKIES_REAL_NAME = "UserRealName";
     }
 }

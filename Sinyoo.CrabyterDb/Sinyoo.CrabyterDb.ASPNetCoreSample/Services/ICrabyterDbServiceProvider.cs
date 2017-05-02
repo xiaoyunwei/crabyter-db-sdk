@@ -11,7 +11,7 @@ namespace Sinyoo.CrabyterDb.ASPNetCoreSample.Services
 
         string Token { get; set; }
 
-        User User { get; }
+        Task<User> GetCurrentUser();
 
         Task<bool> LoginAsync(string userName, string password);
 

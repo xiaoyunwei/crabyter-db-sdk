@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Sinyoo.CrabyterDb;
 using Sinyoo.CrabyterDb.ASPNetCoreSample.Services;
 using Sinyoo.CrabyterDb.ASPNetCoreSample.Models;
+using Sinyoo.CrabyterDb.Models;
 
 namespace Sinyoo.CrabyterDb.ASPNetCoreSample.Controllers
 {
@@ -14,7 +15,6 @@ namespace Sinyoo.CrabyterDb.ASPNetCoreSample.Controllers
 
         public AccountController(ICrabyterDbServiceProvider crabyterDbServiceProvider)
         {
-            crabyterDbServiceProvider.HttpContext = this.HttpContext;
             crabyterDbService = crabyterDbServiceProvider;
         }
 
@@ -45,6 +45,9 @@ namespace Sinyoo.CrabyterDb.ASPNetCoreSample.Controllers
 
                 await HttpContext.Authentication.SignInAsync(ConstantDefinitions.AUTH_SCHEME_NAME, principal);
 
+                User currentUser = await crabyterDbService.GetCurrentUser();
+                HttpContext.Response.Cookies.Append(ConstantDefinitions.COOKIES_REAL_NAME, currentUser.RealName);
+
                 if (returnUrl != null)
                     return LocalRedirect(returnUrl);
                 else
@@ -59,6 +62,7 @@ namespace Sinyoo.CrabyterDb.ASPNetCoreSample.Controllers
         {
             await HttpContext.Authentication.SignOutAsync(ConstantDefinitions.AUTH_SCHEME_NAME);
             await crabyterDbService.LogoutAsync();
+            HttpContext.Response.Cookies.Delete(ConstantDefinitions.COOKIES_REAL_NAME);
             return Redirect("/");
         }
     }

@@ -8,6 +8,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Sinyoo.CrabyterDb.Models;
 using Sinyoo.CrabyterDb.Study;
+using System.Net.Http;
 
 namespace Sinyoo.CrabyterDb.ASPNetCoreSample.Services
 {
@@ -33,21 +34,7 @@ namespace Sinyoo.CrabyterDb.ASPNetCoreSample.Services
             {
                 List<Claim> claims = authenticateInfo.Principal.Claims.ToList();
                 this.UserName = claims.First(p => p.Type == ConstantDefinitions.AUTH_USER_NAME).Value;
-                this.Token = claims.First(p => p.Type == ConstantDefinitions.AUTH_USER_TOKEN).Value;
-
-                try
-                {
-                    UserClient userClient = account.CreateUserClient();
-                    currentUser = await userClient.GetCurrentUser();
-                }
-                catch
-                {
-                    // Invalid UserName or Token
-                    // Logout
-                    this.UserName = "";
-                    this.Token = "";
-                    await httpContext.Authentication.SignOutAsync(ConstantDefinitions.AUTH_SCHEME_NAME);
-                }
+                this.Token = claims.First(p => p.Type == ConstantDefinitions.AUTH_USER_TOKEN).Value;                
             }
         }
 
@@ -89,18 +76,19 @@ namespace Sinyoo.CrabyterDb.ASPNetCoreSample.Services
             }
         }
 
-        private User currentUser;
-        public User User
-        {
-            get
-            {
-                return currentUser;
-            }
-        }
-
         private void OnErrorOccured(object sender, ServiceErrorArgs e)
         {
             clientLogger.LogError(e.Exception.Message);
+
+            if (e.Exception.InnerException is HttpRequestException)
+            {
+                httpContext.Authentication.SignOutAsync(ConstantDefinitions.AUTH_SCHEME_NAME);
+                httpContext.Response.Redirect("/Account/Login");
+            }
+            else
+            {
+                httpContext.Response.Redirect("/Home/Error");
+            }
 
             e.IsHandled = true;
         }
@@ -108,20 +96,12 @@ namespace Sinyoo.CrabyterDb.ASPNetCoreSample.Services
         public async Task<bool> LoginAsync(string userName, string password)
         {
             bool result = await account.LoginAsync(userName, password);
-
-            if(result)
-            {
-                UserClient client = account.CreateUserClient();
-                currentUser = await client.GetCurrentUser();
-            }
-
             return result;
         }
 
         public async Task<bool> LogoutAsync()
         {
             bool result = await account.LogoutAsync();
-            currentUser = null;
             return result;
         }
 
@@ -137,6 +117,13 @@ namespace Sinyoo.CrabyterDb.ASPNetCoreSample.Services
             StudyClient client = account.CreateStudyClient();
             var result = await client.GetStudy(studyId);
             return result;
+        }
+
+        public async Task<User> GetCurrentUser()
+        {
+            UserClient client = account.CreateUserClient();
+            User currentUser = await client.GetCurrentUser();
+            return currentUser;
         }
     }
 

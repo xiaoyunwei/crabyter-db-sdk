@@ -13,14 +13,14 @@ namespace Sinyoo.CrabyterDb.ASPNetCoreSample.Controllers
         private readonly ICrabyterDbServiceProvider crabyterDbService;
 
         public StudyController(ICrabyterDbServiceProvider crabyterDbServiceProvider)
-        {
-            crabyterDbServiceProvider.HttpContext = this.HttpContext;
+        {            
             crabyterDbService = crabyterDbServiceProvider;
         }
 
         [Authorize]
         public async Task<IActionResult> Index()
         {
+            crabyterDbService.HttpContext = this.HttpContext;
             var studyList = await crabyterDbService.GetStudyList();
             return View(studyList);
         }
