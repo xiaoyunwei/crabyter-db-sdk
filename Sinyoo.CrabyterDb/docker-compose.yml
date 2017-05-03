@@ -1,0 +1,8 @@
+version: '2'
+
+services:
+  sinyoo.crabyterdb.aspnetcoresample:
+    image: sinyoo.crabyterdb.aspnetcoresample
+    build:
+      context: ./Sinyoo.CrabyterDb.ASPNetCoreSample
+      dockerfile: Dockerfile
