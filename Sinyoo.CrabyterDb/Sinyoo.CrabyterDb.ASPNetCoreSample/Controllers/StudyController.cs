@@ -20,6 +20,7 @@ namespace Sinyoo.CrabyterDb.ASPNetCoreSample.Controllers
         [Authorize]
         public async Task<IActionResult> Index()
         {
+            // 在Controller构造函数中，this.HttpContext还没有设置，所以不能在构造函数中赋值
             crabyterDbService.HttpContext = this.HttpContext;
             var studyList = await crabyterDbService.GetStudyList();
             return View(studyList);
